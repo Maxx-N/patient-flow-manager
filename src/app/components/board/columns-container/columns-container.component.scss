@@ -1,0 +1,8 @@
+.card-columns-container {
+  height: 100%;
+  app-column {
+    height: 100%;
+    overflow: hidden;
+    border-radius: 10px;
+  }
+}

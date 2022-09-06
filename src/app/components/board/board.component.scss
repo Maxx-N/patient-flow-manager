@@ -2,12 +2,12 @@
   height: calc(100% - 20px);
   border: 10px solid transparent;
 
-.filter-bar {
-  width: 90%;
-  margin: auto;
-}
+  .filter-bar {
+    width: 90%;
+    margin: auto;
+  }
 
-  .columns-container {
+  .columns {
     height: 100%;
     .column-titles {
       color: var(--bg-column);
@@ -19,13 +19,8 @@
       }
     }
 
-    .columns {
+    .columns-container {
       height: 80%;
-      app-cards-column {
-        height: 100%;
-        overflow: hidden;
-        border-radius:10px;
-      }
     }
   }
 }

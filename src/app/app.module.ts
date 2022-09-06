@@ -5,17 +5,19 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { AppComponent } from './components/app/app.component';
 import { BoardComponent } from './components/board/board.component';
-import { CardsColumnComponent } from './components/board/cards-column/cards-column.component';
-import { PatientCardComponent } from './components/board/cards-column/patient-card/patient-card.component';
+import { ColumnComponent } from './components/board/columns-container/column/column.component';
+import { PatientCardComponent } from './components/board/columns-container/column/patient-card/patient-card.component';
 import { FilterBarComponent } from './components/board/filter-bar/filter-bar.component';
+import { ColumnsContainerComponent } from './components/board/columns-container/columns-container.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     BoardComponent,
-    CardsColumnComponent,
+    ColumnComponent,
     PatientCardComponent,
     FilterBarComponent,
+    ColumnsContainerComponent,
   ],
   imports: [BrowserModule, HttpClientModule, FlexLayoutModule],
   providers: [],

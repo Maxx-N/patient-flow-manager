@@ -3,14 +3,18 @@
     <app-filter-bar></app-filter-bar>
   </div>
 
-  <div class="columns-container" fxFlex="92%" fxLayout="column" fxLayoutAlign="space-evenly">
+  <div
+    class="columns"
+    fxFlex="92%"
+    fxLayout="column"
+    fxLayoutAlign="space-evenly"
+  >
     <div class="column-titles" fxLayout fxLayoutAlign="space-evenly">
       <div fxFlex="30%">TO DO</div>
       <div fxFlex="30%">DONE</div>
     </div>
-    <div class="columns" fxLayout fxLayoutAlign="space-evenly">
-      <app-cards-column fxFlex="30%"></app-cards-column>
-      <app-cards-column fxFlex="30%"></app-cards-column>
+    <div class="columns-container">
+      <app-columns-container></app-columns-container>
     </div>
   </div>
 </div>
