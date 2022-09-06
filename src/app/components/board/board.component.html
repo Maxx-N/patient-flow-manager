@@ -14,7 +14,7 @@
       <div fxFlex="30%">DONE</div>
     </div>
     <div class="columns-container">
-      <app-columns-container></app-columns-container>
+      <app-columns-container [toDoCards]="toDoCards$ | async" [doneCards]="doneCards$ | async"></app-columns-container>
     </div>
   </div>
 </div>

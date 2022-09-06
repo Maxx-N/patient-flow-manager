@@ -28,4 +28,12 @@ export class CardService {
       })
     );
   }
+
+  getToDoCards(cards: Card[]) {
+    return cards.filter((card) => card.status !== 'DONE');
+  }
+
+  getDoneCards(cards: Card[]) {
+    return cards.filter((card) => card.status === 'DONE');
+  }
 }

@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+
+import { Card } from 'src/app/model/card';
 
 @Component({
   selector: 'app-column',
@@ -6,6 +8,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./column.component.scss'],
 })
 export class ColumnComponent implements OnInit {
+  @Input() cards: Card[];
+
   constructor() {}
 
   ngOnInit(): void {}
