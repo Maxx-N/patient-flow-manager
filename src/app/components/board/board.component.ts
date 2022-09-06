@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 
 import { CardService } from 'src/app/services/card.service';
+import { Card } from 'src/app/model/card';
 
 @Component({
   selector: 'app-board',
@@ -8,9 +10,11 @@ import { CardService } from 'src/app/services/card.service';
   styleUrls: ['./board.component.scss'],
 })
 export class BoardComponent implements OnInit {
+  cards$: Observable<Card[]>;
+
   constructor(private cardService: CardService) {}
 
   ngOnInit(): void {
-    this.cardService.fetchCards();
+    this.cards$ = this.cardService.fetchCards();
   }
 }
