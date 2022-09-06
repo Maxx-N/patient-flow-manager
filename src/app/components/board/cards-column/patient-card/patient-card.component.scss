@@ -1,0 +1,47 @@
+.patient-card {
+  height: calc(100% - 26px);
+  border-radius: 10px;
+  border: 3px solid var(--text-color);
+  padding: 10px;
+
+  .left-card,
+  .center-card,
+  .right-card {
+    text-align: center;
+  }
+
+  .left-card {
+    .patient-name {
+      color: var(--bg-column);
+      background-color: var(--text-color);
+      padding: 10px;
+      border-radius: 10px;
+      text-align: center;
+    }
+  }
+
+  .center-card {
+    .patient-arrhythmias {
+      height: calc(100% - 20px);
+      div {
+        height: 20%;
+        font-weight: bolder;
+      }
+      ul {
+        height: 80%;
+        overflow-y: auto;
+        list-style: none;
+        padding: 0;
+      }
+    }
+  }
+
+  .right-card {
+    .created-date {
+      font-style: italic;
+    }
+
+    .status {
+    }
+  }
+}

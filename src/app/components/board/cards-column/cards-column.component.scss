@@ -1,0 +1,12 @@
+.cards-column {
+  height: 100%;
+  background: var(--bg-column);
+  border-radius: 10px;
+  overflow: auto;
+
+
+  .patient-card {
+    margin: 10px;
+  }
+}
+

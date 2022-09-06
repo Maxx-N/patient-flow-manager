@@ -1,1 +1,41 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import url("./variables.scss");
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: inter;
+  font-style: normal;
+  color: var(--text-color);
+  background: var(--bg-gradient);
+}
+
+.btn {
+  cursor: pointer;
+
+  font-family: Roboto;
+  text-transform: uppercase;
+
+  padding: 10px;
+
+  background: #3c50e0;
+  color: #fff;
+
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2),
+    0px 2px 2px rgba(0, 0, 0, 0.14), 0px 1px 5px rgba(0, 0, 0, 0.12);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &:disabled {
+    opacity: 0.5;
+  }
+}

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { CardService } from './services/card.service';
+import { CardService } from '../../services/card.service';
 
 @Component({
   selector: 'app-root',
@@ -8,9 +8,5 @@ import { CardService } from './services/card.service';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  constructor(private cardService: CardService) {}
-
-  ngOnInit() {
-    this.cardService.fetchCards();
-  }
+  constructor() {}
 }
