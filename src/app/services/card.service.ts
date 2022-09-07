@@ -11,6 +11,7 @@ import { Card, DtoCard } from '../model/card';
 export class CardService {
   private readonly CARDS_API_URL = `${environment.api_url}/cards`;
   private cards: Card[];
+  private filteredCards: Card[];
   cardsSubject = new Subject<void>();
 
   constructor(private http: HttpClient) {}
@@ -27,6 +28,8 @@ export class CardService {
         };
       });
 
+      this.filteredCards = this.cards;
+
       this.cardsSubject.next();
     });
   }
@@ -40,7 +43,7 @@ export class CardService {
   }
 
   getCards(): Card[] {
-    return [...this.cards];
+    return [...this.filteredCards];
   }
 
   updateCardStatus(cardId: number, newStatus: 'PENDING' | 'REJECTED' | 'DONE') {
@@ -65,6 +68,31 @@ export class CardService {
     }
 
     return arrhythmias;
+  }
+
+  filterCards(name: string, arrhythmias: string[]): void {
+    const filteredName = name.toLowerCase().trim();
+    const filteredArrhythmias = arrhythmias.map((arr) => {
+      return arr.toLowerCase().trim();
+    });
+
+    this.filteredCards = this.cards
+      .filter((card) => {
+        if (!!filteredArrhythmias.length) {
+          return card.arrhythmias.some((arr) => {
+            return filteredArrhythmias.includes(arr.toLowerCase().trim());
+          });
+        } else {
+          return true;
+        }
+      })
+      .filter((card) => {
+        return filteredName
+          ? card.patientName.toLowerCase().trim().includes(filteredName)
+          : true;
+      });
+
+    this.cardsSubject.next();
   }
 
   private getCardById(cardId: number) {

@@ -21,8 +21,7 @@ export class FilterBarComponent implements OnInit {
   }
 
   onFilter(): void {
-    console.log(this.filteredArrhythmias);
-    console.log(this.filteredName);
+    this.cardService.filterCards(this.filteredName, this.filteredArrhythmias);
   }
 
   onDeleteName(): void {
