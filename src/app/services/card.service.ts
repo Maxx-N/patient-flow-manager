@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { map, Observable, Subject } from 'rxjs';
 
 import { environment } from 'src/environments/environment';
 import { Card, DtoCard } from '../model/card';
@@ -10,30 +10,36 @@ import { Card, DtoCard } from '../model/card';
 })
 export class CardService {
   private readonly CARDS_API_URL = `${environment.api_url}/cards`;
+  private cards: Card[];
+  cardsSubject = new Subject<void>();
 
   constructor(private http: HttpClient) {}
 
-  fetchCards(): Observable<Card[]> {
-    return this.http.get<DtoCard[]>(this.CARDS_API_URL).pipe(
-      map((dtoCards) => {
-        return dtoCards.map((dtoCard) => {
-          return {
-            id: dtoCard.id,
-            createdDate: new Date(dtoCard.created_date),
-            patientName: dtoCard.patient_name,
-            arrhythmias: dtoCard.arrhythmias,
-            status: dtoCard.status,
-          };
-        });
-      })
-    );
+  fetchCards(): void {
+    this.http.get<DtoCard[]>(this.CARDS_API_URL).subscribe((dtoCards) => {
+      this.cards = dtoCards.map((dtoCard) => {
+        return {
+          id: dtoCard.id,
+          createdDate: new Date(dtoCard.created_date),
+          patientName: dtoCard.patient_name,
+          arrhythmias: dtoCard.arrhythmias,
+          status: dtoCard.status,
+        };
+      });
+
+      this.cardsSubject.next();
+    });
   }
 
-  getToDoCards(cards: Card[]) {
-    return cards.filter((card) => card.status !== 'DONE');
+  getCards(): Card[] {
+    return [...this.cards];
   }
 
-  getDoneCards(cards: Card[]) {
-    return cards.filter((card) => card.status === 'DONE');
+  getToDoCards() {
+    return this.getCards().filter((card) => card.status !== 'DONE');
+  }
+
+  getDoneCards() {
+    return this.getCards().filter((card) => card.status === 'DONE');
   }
 }

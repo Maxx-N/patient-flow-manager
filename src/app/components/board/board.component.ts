@@ -10,22 +10,17 @@ import { Card } from 'src/app/model/card';
   styleUrls: ['./board.component.scss'],
 })
 export class BoardComponent implements OnInit {
-  toDoCards$: Observable<Card[]>;
-  doneCards$: Observable<Card[]>;
+  toDoCards: Card[];
+  doneCards: Card[];
 
   constructor(private cardService: CardService) {}
 
   ngOnInit(): void {
-    this.toDoCards$ = this.cardService.fetchCards().pipe(
-      map((cards) => {
-        return this.cardService.getToDoCards(cards);
-      })
-    );
+    this.cardService.cardsSubject.subscribe(() => {
+      this.toDoCards = this.cardService.getToDoCards();
+      this.doneCards = this.cardService.getDoneCards();
+    });
 
-    this.doneCards$ = this.cardService.fetchCards().pipe(
-      map((cards) => {
-        return this.cardService.getDoneCards(cards);
-      })
-    );
+    this.cardService.fetchCards();
   }
 }
