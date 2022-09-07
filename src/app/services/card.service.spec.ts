@@ -42,8 +42,14 @@ describe('CardService', () => {
     service.fetchCards();
   });
 
+  it('should get the to do and the done cards', () => {
+    service.setCardsForTesting(getSampleCards());
+    expect(service.getToDoCards().length).toEqual(7);
+    expect(service.getDoneCards().length).toEqual(3);
+  });
+
   it('should correctly filter the cards', () => {
-    service.setCards(getSampleCards());
+    service.setCardsForTesting(getSampleCards());
 
     service.filterCards('', ['arrhythmia n° 4', 'Arrhythmia n° 9']);
     expect(service.getCards().length).toEqual(6);

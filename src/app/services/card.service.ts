@@ -106,8 +106,9 @@ export class CardService {
     this.cardsSubject.next();
   }
 
-  setCards(cards: Card[]) {
+  setCardsForTesting(cards: Card[]) {
     this.cards = cards;
+    this.filteredCards = this.cards;
     this.cardsSubject.next();
   }
 
