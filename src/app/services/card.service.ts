@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 
 import { environment } from 'src/environments/environment';
 import { Card, DtoCard } from '../model/card';
@@ -53,7 +53,7 @@ export class CardService {
       });
   }
 
-  private getCards(): Card[] {
+  getCards(): Card[] {
     return [...this.filteredCards];
   }
 
