@@ -48,6 +48,25 @@ export class CardService {
     this.cardsSubject.next();
   }
 
+  getArrhythmias(): string[] {
+    const duplicatedArhythmias: string[] = [];
+    for (const card of this.cards) {
+      duplicatedArhythmias.push(...card.arrhythmias);
+    }
+
+    const obj = {};
+    for (const arr of duplicatedArhythmias) {
+      obj[arr] = arr;
+    }
+
+    const arrhythmias: string[] = [];
+    for (const key of Object.keys(obj)) {
+      arrhythmias.push(obj[key]);
+    }
+
+    return arrhythmias;
+  }
+
   private getCardById(cardId: number) {
     return this.cards.find((card) => {
       return card.id === cardId;
