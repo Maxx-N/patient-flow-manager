@@ -31,15 +31,26 @@ export class CardService {
     });
   }
 
-  getCards(): Card[] {
-    return [...this.cards];
-  }
-
   getToDoCards() {
     return this.getCards().filter((card) => card.status !== 'DONE');
   }
 
   getDoneCards() {
     return this.getCards().filter((card) => card.status === 'DONE');
+  }
+
+  getCards(): Card[] {
+    return [...this.cards];
+  }
+
+  updateCardStatus(cardId: number, newStatus: 'PENDING' | 'REJECTED' | 'DONE') {
+    this.getCardById(cardId).status = newStatus;
+    this.cardsSubject.next();
+  }
+
+  private getCardById(cardId: number) {
+    return this.cards.find((card) => {
+      return card.id === cardId;
+    });
   }
 }

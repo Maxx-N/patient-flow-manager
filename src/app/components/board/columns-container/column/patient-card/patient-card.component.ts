@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 import { Card } from 'src/app/model/card';
+import { CardService } from 'src/app/services/card.service';
 
 @Component({
   selector: 'app-patient-card',
@@ -10,11 +11,11 @@ import { Card } from 'src/app/model/card';
 export class PatientCardComponent implements OnInit {
   @Input() card: Card;
 
-  constructor() {}
+  constructor(private cardService: CardService) {}
 
   ngOnInit(): void {}
 
   onChangeStatus(newStatus: 'PENDING' | 'REJECTED' | 'DONE'): void {
-    this.card.status = newStatus;
+    this.cardService.updateCardStatus(this.card.id, newStatus);
   }
 }
