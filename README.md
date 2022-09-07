@@ -4,18 +4,18 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## INSTRUCTION TO RUN THE PROJECT LOCALLY
 
-### Open your terminal and follow these instructions:
+### First, install and run the [server application](https://github.com/CardioLogs/card-triage):
 
-#### First, install and run the [server application](https://github.com/CardioLogs/card-triage):
-
+- Open a terminal
 - Navigate to the directory that will contain the project: `cd [PATH-TO-YOUR DIRECTORY]` ;
 - Clone the project: `git clone https://github.com/CardioLogs/card-triage.git` ;
 - Navigate to the project: `cd card-triage` ;
 - Install the node dependencies: `npm install`;
 - Run the local API server `npm run api`.
 
-#### Then, install and run this client application:
+### Then, install and run this client application:
 
+- Open a new terminal (let the previous one running)
 - Navigate to the directory that will contain the project: `cd [PATH-TO-YOUR DIRECTORY]` ;
 - Clone the project: `git clone https://github.com/Maxx-N/patient-flow-manager.git` ;
 - Navigate to the project: `cd patient-flow-manager` ;
