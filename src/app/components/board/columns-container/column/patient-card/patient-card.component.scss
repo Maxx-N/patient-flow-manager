@@ -43,6 +43,14 @@
     }
 
     .status {
+      text-align: center;
+      min-width: 50%;
+      ::ng-deep {
+        .mat-select-value,
+        .mat-select-arrow {
+          color: var(--bg-column);
+        }
+      }
     }
   }
 }

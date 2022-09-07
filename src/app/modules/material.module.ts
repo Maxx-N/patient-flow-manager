@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
+import { MatSelectModule } from '@angular/material/select';
 
-const materialModules = [];
+const materialModules = [MatSelectModule];
 
 @NgModule({
-  declarations: [...materialModules],
   imports: [...materialModules],
+  exports: [...materialModules],
 })
 export class MaterialModule {}

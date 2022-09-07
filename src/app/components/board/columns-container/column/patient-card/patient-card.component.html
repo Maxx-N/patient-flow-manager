@@ -1,21 +1,38 @@
 <div class="patient-card" fxLayoutAlign="space-between">
-  <div class="left-card" fxFlex="30%">
-    <div class="patient-name">{{card.patientName}}</div>
+  <div
+    class="left-card"
+    fxFlex="30%"
+    fxLayout="column"
+    fxLayoutAlign="flex-start"
+  >
+    <div class="patient-name">{{ card.patientName }}</div>
   </div>
 
   <div class="center-card" fxFlex="30%">
     <div class="patient-arrhythmias">
       <div>Arrhythmias</div>
       <ul>
-        <li *ngFor="let arrhythmia of card.arrhythmias">{{arrhythmia}}</li>
+        <li *ngFor="let arrhythmia of card.arrhythmias">{{ arrhythmia }}</li>
       </ul>
     </div>
   </div>
 
-  <div class="right-card" fxFlex="30%" fxLayout="column" fxLayoutAlign="space-between">
-    <div class="created-date">{{card.createdDate | date}}</div>
-    <div class="status" fxLayoutAlign="center">
-      <button class="btn">{{card.status}}</button>
-    </div>
+  <div
+    class="right-card"
+    fxFlex="30%"
+    fxLayout="column"
+    fxLayoutAlign="space-between flex-end"
+  >
+    <div class="created-date">{{ card.createdDate | date }}</div>
+    <button class="btn status">
+      <mat-select [value]="'DONE'">
+        <mat-option
+          *ngFor="let choice of ['DONE', 'TO DO', 'OTHER']"
+          [value]="choice"
+        >
+          {{ choice }}
+        </mat-option>
+      </mat-select>
+    </button>
   </div>
 </div>
