@@ -2,7 +2,7 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.1.3.
 
-## INSTRUCTION TO RUN THE PROJECT LOCALLY
+## INSTRUCTIONS TO RUN THE PROJECT LOCALLY
 
 ### First, install and run the [server application](https://github.com/CardioLogs/card-triage):
 
@@ -21,10 +21,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 - Navigate to the project: `cd patient-flow-manager` ;
 - Install the node dependencies: `npm install`;
 - Run the project: `ng serve`.
-
-## Development server
-
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- From your browser, navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
 ## Code scaffolding
 
