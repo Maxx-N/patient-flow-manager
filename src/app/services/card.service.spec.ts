@@ -23,7 +23,7 @@ describe('CardService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should correctly fetch the cards', () => {
+  it('should fetch the cards', () => {
     const http = TestBed.inject(HttpClient);
     spyOn(http, 'get').and.returnValue(of(getSampleDtoCards()));
     service.cardsSubject.subscribe(() => {
@@ -48,7 +48,13 @@ describe('CardService', () => {
     expect(service.getDoneCards().length).toEqual(3);
   });
 
-  it('should correctly filter the cards', () => {
+  it('should update the card status', () => {
+    service.setCardsForTesting(getSampleCards());
+    service.updateCardStatus(0, 'DONE');
+    expect(service.getCards()[0].status).toEqual('DONE');
+  });
+
+  it('should filter the cards', () => {
     service.setCardsForTesting(getSampleCards());
 
     service.filterCards('', ['arrhythmia n° 4', 'Arrhythmia n° 9']);
