@@ -23,7 +23,7 @@ describe('CardService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should fetch the cards', () => {
+  it('should correctly fetch the cards', () => {
     const http = TestBed.inject(HttpClient);
     spyOn(http, 'get').and.returnValue(of(getSampleDtoCards()));
     service.cardsSubject.subscribe(() => {
@@ -42,19 +42,24 @@ describe('CardService', () => {
     service.fetchCards();
   });
 
-  it('should get the to do and the done cards', () => {
+  it('should get 7 "todo" and 3 "done" cards', () => {
     service.setCardsForTesting(getSampleCards());
     expect(service.getToDoCards().length).toEqual(7);
     expect(service.getDoneCards().length).toEqual(3);
   });
 
-  it('should update the card status', () => {
+  it('should update the first card status to "done"', () => {
     service.setCardsForTesting(getSampleCards());
     service.updateCardStatus(0, 'DONE');
     expect(service.getCards()[0].status).toEqual('DONE');
   });
 
-  it('should filter the cards', () => {
+  it('should get 9 arrhythmias', () => {
+    service.setCardsForTesting(getSampleCards());
+    expect(service.getArrhythmias().length).toEqual(9);
+  });
+
+  it('should correctly filter the cards', () => {
     service.setCardsForTesting(getSampleCards());
 
     service.filterCards('', ['arrhythmia n° 4', 'Arrhythmia n° 9']);
