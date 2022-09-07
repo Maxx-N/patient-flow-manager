@@ -4,4 +4,17 @@
   padding: 10px 0;
   margin: 10px 0;
   height: 100%;
+
+  mat-form-field {
+    border-radius: 10px;
+    background-color: var(--bg-column);
+    color: var(--text-color);
+    text-align: center;
+    mat-label {
+      color: var(--pending-btn);
+    }
+    button {
+      color: var(--pending-btn);
+    }
+  }
 }
