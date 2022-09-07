@@ -53,7 +53,7 @@ export class CardService {
       });
   }
 
-  getCards(): Card[] {
+  private getCards(): Card[] {
     return [...this.filteredCards];
   }
 
