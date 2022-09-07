@@ -41,6 +41,30 @@ describe('CardService', () => {
     });
     service.fetchCards();
   });
+
+  it('should correctly filter the cards', () => {
+    service.setCards(getSampleCards());
+
+    service.filterCards('', ['arrhythmia n° 4', 'Arrhythmia n° 9']);
+    expect(service.getCards().length).toEqual(6);
+
+    service.filterCards('', []);
+    expect(service.getCards().length).toEqual(10);
+
+    service.filterCards('', ['Arrhythmia n° 9']);
+    expect(service.getCards().length).toEqual(1);
+    expect(service.getCards()[0].id).toEqual(9);
+
+    service.filterCards('1', []);
+    expect(service.getCards().length).toEqual(1);
+    expect(service.getCards()[0].id).toEqual(1);
+
+    service.filterCards('1', ['Arrhythmia n° 9']);
+    expect(service.getCards().length).toEqual(0);
+
+    service.filterCards('1', ['Arrhythmia n° 9', 'Arrhythmia n° 1']);
+    expect(service.getCards().length).toEqual(1);
+  });
 });
 
 const getSampleDtoCards = (): DtoCard[] => {

@@ -106,6 +106,11 @@ export class CardService {
     this.cardsSubject.next();
   }
 
+  setCards(cards: Card[]) {
+    this.cards = cards;
+    this.cardsSubject.next();
+  }
+
   private getCardById(cardId: number) {
     return this.cards.find((card) => {
       return card.id === cardId;
