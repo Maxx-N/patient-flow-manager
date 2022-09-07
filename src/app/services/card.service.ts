@@ -35,11 +35,22 @@ export class CardService {
   }
 
   getToDoCards() {
-    return this.getCards().filter((card) => card.status !== 'DONE');
+    return this.getCards()
+      .filter((card) => card.status !== 'DONE')
+      .sort((c1, c2) => {
+        return c1.patientName < c2.patientName ? -1 : +1;
+      })
+      .sort((c1, c2) => {
+        return c1.status === 'PENDING' && c2.status === 'REJECTED' ? -1 : +1;
+      });
   }
 
   getDoneCards() {
-    return this.getCards().filter((card) => card.status === 'DONE');
+    return this.getCards()
+      .filter((card) => card.status === 'DONE')
+      .sort((c1, c2) => {
+        return c1.patientName < c2.patientName ? -1 : +1;
+      });
   }
 
   getCards(): Card[] {
