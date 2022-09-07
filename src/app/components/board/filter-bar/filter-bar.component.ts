@@ -8,7 +8,8 @@ import { CardService } from 'src/app/services/card.service';
   styleUrls: ['./filter-bar.component.scss'],
 })
 export class FilterBarComponent implements OnInit {
-  value = '';
+  filteredName = '';
+  filteredArrhythmias = [];
   arrhythmias: string[];
 
   constructor(private cardService: CardService) {}
@@ -17,5 +18,14 @@ export class FilterBarComponent implements OnInit {
     this.cardService.cardsSubject.subscribe(() => {
       this.arrhythmias = this.cardService.getArrhythmias();
     });
+  }
+
+  onFilter(): void {
+    console.log(this.filteredArrhythmias);
+    console.log(this.filteredName);
+  }
+
+  onDeleteName(): void {
+    this.filteredName = '';
   }
 }
