@@ -54,3 +54,63 @@
     }
   }
 }
+
+.patient-card.done {
+  color: var(--done-color);
+  border-color: var(--done-color);
+  .left-card {
+    .patient-name {
+      background-color: var(--done-color);
+    }
+  }
+  .center-card {
+    .patient-arrhythmias {
+      ul {
+        border-color: var(--done-color);
+      }
+    }
+  }
+  .right-card {
+    .status {
+      background-color: var(--done-btn);
+    }
+  }
+}
+
+.patient-card.rejected {
+  color: var(--rejected-color);
+  border-color: var(--rejected-color);
+  .left-card {
+    .patient-name {
+      background-color: var(--rejected-color);
+    }
+  }
+  .center-card {
+    .patient-arrhythmias {
+      ul {
+        border-color: var(--rejected-color);
+      }
+    }
+  }
+  .right-card {
+    .status {
+      background-color: var(--rejected-btn);
+    }
+  }
+}
+
+.mat-option {
+  color: var(--bg-column);
+  text-align: center;
+  &.pending {
+    background-color: var(--pending-btn);
+  }
+
+  &.rejected {
+    background-color: var(--rejected-btn);
+  }
+
+  &.done {
+    background-color: var(--done-btn);
+  }
+}

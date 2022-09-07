@@ -1,4 +1,11 @@
-<div class="patient-card" fxLayoutAlign="space-between">
+<div
+  class="patient-card"
+  fxLayoutAlign="space-between"
+  [ngClass]="{
+    done: card.status === 'DONE',
+    rejected: card.status === 'REJECTED'
+  }"
+>
   <div
     class="left-card"
     fxFlex="30%"
@@ -25,13 +32,20 @@
   >
     <div class="created-date">{{ card.createdDate | date }}</div>
     <button class="btn status">
-      <mat-select [value]="'DONE'">
-        <mat-option
-          *ngFor="let choice of ['DONE', 'TO DO', 'OTHER']"
-          [value]="choice"
-        >
-          {{ choice }}
-        </mat-option>
+      <mat-select [value]="card.status">
+        <ng-container *ngFor="let choice of ['PENDING', 'REJECTED', 'DONE']">
+          <mat-option
+            [value]="choice"
+            [ngClass]="{
+              'display-none': choice === card.status,
+              pending: choice === 'PENDING',
+              rejected: choice === 'REJECTED',
+              done: choice === 'DONE'
+            }"
+          >
+            {{ choice }}
+          </mat-option>
+        </ng-container>
       </mat-select>
     </button>
   </div>
