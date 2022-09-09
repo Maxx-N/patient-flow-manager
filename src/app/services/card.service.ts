@@ -32,7 +32,10 @@ export class CardService {
         };
       });
 
-      this.cards = JSON.parse(JSON.stringify(this.originalCards));
+      this.cards = this.originalCards.map((card) => {
+        return { ...card };
+      });
+
       this.displayedCards = this.cards;
       this.updateDisplayedCards();
     });
@@ -42,7 +45,7 @@ export class CardService {
     this.displayedCardsSubject.next(this.displayedCards);
   }
 
-  getToDoCards() {
+  getToDoCards(): Observable<Card[]> {
     return this.displayedCards$.pipe(
       map((cards) => {
         return cards
@@ -59,7 +62,7 @@ export class CardService {
     );
   }
 
-  getDoneCards() {
+  getDoneCards(): Observable<Card[]> {
     return this.displayedCards$.pipe(
       map((cards) => {
         return cards
@@ -124,11 +127,11 @@ export class CardService {
     this.updateDisplayedCards();
   }
 
-  // setCardsForTesting(cards: Card[]) {
-  //   this.cards = cards;
-  //   this.filteredCards = this.cards;
-  //   this.cardsSubject.next();
-  // }
+  setCardsForTesting(cards: Card[]) {
+    this.cards = cards;
+    this.displayedCards = this.cards;
+    this.updateDisplayedCards();
+  }
 
   private getCardById(cardId: number) {
     return this.cards.find((card) => {
