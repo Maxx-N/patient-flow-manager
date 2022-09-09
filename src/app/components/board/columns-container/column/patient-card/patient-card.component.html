@@ -31,21 +31,23 @@
     fxLayoutAlign="space-between flex-end"
   >
     <div class="created-date">{{ card.createdDate | date }}</div>
-    <button class="btn status">
-      <mat-select [value]="card.status" (selectionChange)="onChangeStatus($event.value)">
-        <mat-option
-          *ngFor="let choice of ['PENDING', 'REJECTED', 'DONE']"
-          [value]="choice"
-          [ngClass]="{
-            'display-none': choice === card.status,
-            pending: choice === 'PENDING',
-            rejected: choice === 'REJECTED',
-            done: choice === 'DONE'
-          }"
-        >
-          {{ choice }}
-        </mat-option>
-      </mat-select>
-    </button>
+    <mat-select
+      class="btn"
+      [value]="card.status"
+      (selectionChange)="onChangeStatus($event.value)"
+    >
+      <mat-option
+        *ngFor="let choice of ['PENDING', 'REJECTED', 'DONE']"
+        [value]="choice"
+        [ngClass]="{
+          'display-none': choice === card.status,
+          pending: choice === 'PENDING',
+          rejected: choice === 'REJECTED',
+          done: choice === 'DONE'
+        }"
+      >
+        {{ choice }}
+      </mat-option>
+    </mat-select>
   </div>
 </div>
