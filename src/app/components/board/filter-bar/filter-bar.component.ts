@@ -1,5 +1,5 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 
 import { CardService } from 'src/app/services/card.service';
 
@@ -8,22 +8,15 @@ import { CardService } from 'src/app/services/card.service';
   templateUrl: './filter-bar.component.html',
   styleUrls: ['./filter-bar.component.scss'],
 })
-export class FilterBarComponent implements OnInit, OnDestroy {
+export class FilterBarComponent implements OnInit {
   filteredName = '';
   filteredArrhythmias = [];
-  arrhythmias: string[];
-  private cardsSubscription: Subscription;
+  arrhythmias$: Observable<string[]>;
 
   constructor(private cardService: CardService) {}
 
   ngOnInit(): void {
-    this.cardsSubscription = this.cardService.cardsSubject.subscribe(() => {
-      this.arrhythmias = this.cardService.getArrhythmias();
-    });
-  }
-
-  ngOnDestroy(): void {
-    this.cardsSubscription.unsubscribe();
+    this.arrhythmias$ = this.cardService.getArrhythmias();
   }
 
   onFilter(): void {

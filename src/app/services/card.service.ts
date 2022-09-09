@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { first, last, map, Observable, Subject, takeLast, tap } from 'rxjs';
 
 import { environment } from 'src/environments/environment';
 import { Card, DtoCard } from '../models/card';
@@ -10,15 +10,19 @@ import { Card, DtoCard } from '../models/card';
 })
 export class CardService {
   private readonly CARDS_API_URL = `${environment.api_url}/cards`;
-  private cards: Card[];
-  private filteredCards: Card[];
-  cardsSubject = new Subject<void>();
+  private originalCards: Card[] = [];
+  private cards: Card[] = [];
+
+  private displayedCards: Card[] = [];
+  private displayedCardsSubject = new Subject<Card[]>();
+  displayedCards$: Observable<Card[]> =
+    this.displayedCardsSubject.asObservable();
 
   constructor(private http: HttpClient) {}
 
   fetchCards(): void {
     this.http.get<DtoCard[]>(this.CARDS_API_URL).subscribe((dtoCards) => {
-      this.cards = dtoCards.map((dtoCard) => {
+      this.originalCards = dtoCards.map((dtoCard) => {
         return {
           id: dtoCard.id,
           createdDate: new Date(dtoCard.created_date),
@@ -28,57 +32,71 @@ export class CardService {
         };
       });
 
-      this.filteredCards = this.cards;
-
-      this.cardsSubject.next();
+      this.cards = JSON.parse(JSON.stringify(this.originalCards));
+      this.displayedCards = this.cards;
+      this.updateDisplayedCards();
     });
   }
 
+  private updateDisplayedCards(): void {
+    this.displayedCardsSubject.next(this.displayedCards);
+  }
+
   getToDoCards() {
-    return this.getCards()
-      .filter((card) => card.status !== 'DONE')
-      .sort((c1, c2) => {
-        return c1.patientName < c2.patientName ? -1 : +1;
+    return this.displayedCards$.pipe(
+      map((cards) => {
+        return cards
+          .filter((card) => card.status !== 'DONE')
+          .sort((c1, c2) => {
+            return c1.patientName < c2.patientName ? -1 : +1;
+          })
+          .sort((c1, c2) => {
+            return c1.status === 'PENDING' && c2.status === 'REJECTED'
+              ? -1
+              : +1;
+          });
       })
-      .sort((c1, c2) => {
-        return c1.status === 'PENDING' && c2.status === 'REJECTED' ? -1 : +1;
-      });
+    );
   }
 
   getDoneCards() {
-    return this.getCards()
-      .filter((card) => card.status === 'DONE')
-      .sort((c1, c2) => {
-        return c1.patientName < c2.patientName ? -1 : +1;
-      });
-  }
-
-  getCards(): Card[] {
-    return [...this.filteredCards];
+    return this.displayedCards$.pipe(
+      map((cards) => {
+        return cards
+          .filter((card) => card.status === 'DONE')
+          .sort((c1, c2) => {
+            return c1.patientName < c2.patientName ? -1 : +1;
+          });
+      })
+    );
   }
 
   updateCardStatus(cardId: number, newStatus: 'PENDING' | 'REJECTED' | 'DONE') {
     this.getCardById(cardId).status = newStatus;
-    this.cardsSubject.next();
+    this.updateDisplayedCards();
   }
 
-  getArrhythmias(): string[] {
-    const duplicatedArhythmias: string[] = [];
-    for (const card of this.cards) {
-      duplicatedArhythmias.push(...card.arrhythmias);
-    }
+  getArrhythmias(): Observable<string[]> {
+    return this.displayedCards$.pipe(
+      map(() => {
+        const duplicatedArhythmias: string[] = [];
+        for (const card of this.cards) {
+          duplicatedArhythmias.push(...card.arrhythmias);
+        }
 
-    const obj = {};
-    for (const arr of duplicatedArhythmias) {
-      obj[arr] = arr;
-    }
+        const obj = {};
+        for (const arr of duplicatedArhythmias) {
+          obj[arr] = arr;
+        }
 
-    const arrhythmias: string[] = [];
-    for (const key of Object.keys(obj)) {
-      arrhythmias.push(obj[key]);
-    }
+        const arrhythmias: string[] = [];
+        for (const key of Object.keys(obj)) {
+          arrhythmias.push(obj[key]);
+        }
 
-    return arrhythmias;
+        return arrhythmias;
+      })
+    );
   }
 
   filterCards(name: string, arrhythmias: string[]): void {
@@ -87,7 +105,7 @@ export class CardService {
       return arr.toLowerCase().trim();
     });
 
-    this.filteredCards = this.cards
+    this.displayedCards = this.cards
       .filter((card) => {
         if (!!filteredArrhythmias.length) {
           return card.arrhythmias.some((arr) => {
@@ -103,14 +121,14 @@ export class CardService {
           : true;
       });
 
-    this.cardsSubject.next();
+    this.updateDisplayedCards();
   }
 
-  setCardsForTesting(cards: Card[]) {
-    this.cards = cards;
-    this.filteredCards = this.cards;
-    this.cardsSubject.next();
-  }
+  // setCardsForTesting(cards: Card[]) {
+  //   this.cards = cards;
+  //   this.filteredCards = this.cards;
+  //   this.cardsSubject.next();
+  // }
 
   private getCardById(cardId: number) {
     return this.cards.find((card) => {

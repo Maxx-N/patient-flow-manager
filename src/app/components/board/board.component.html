@@ -15,8 +15,8 @@
     </div>
     <div class="columns-container">
       <app-columns-container
-        [toDoCards]="toDoCards"
-        [doneCards]="doneCards"
+        [toDoCards]="toDoCards$ | async"
+        [doneCards]="doneCards$ | async"
       ></app-columns-container>
     </div>
   </div>

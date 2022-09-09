@@ -26,7 +26,7 @@
         (ngModelChange)="onFilter()"
       >
         <mat-option
-          *ngFor="let arrhythmia of arrhythmias"
+          *ngFor="let arrhythmia of (arrhythmias$ | async)"
           [value]="arrhythmia"
           >{{ arrhythmia }}</mat-option
         >
