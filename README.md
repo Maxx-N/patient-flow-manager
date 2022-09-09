@@ -1,5 +1,7 @@
 # PatientFlowManager
 
+This application helps the nurses to better manage the patient flow in a hospital.
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.1.3.
 
 ## INSTRUCTIONS TO RUN THE PROJECT LOCALLY
