@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 
-import { Card } from 'src/app/model/card';
+import { Card } from 'src/app/models/card';
 import { CardService } from 'src/app/services/card.service';
 
 @Component({

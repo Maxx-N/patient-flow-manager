@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 
-import { Card } from 'src/app/model/card';
+import { Card } from 'src/app/models/card';
 
 @Component({
   selector: 'app-column',

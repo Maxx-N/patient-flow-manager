@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { of } from 'rxjs';
 
 import { CardService } from './card.service';
-import { Card, DtoCard } from '../model/card';
+import { Card, DtoCard } from '../models/card';
 
 describe('CardService', () => {
   let service: CardService;

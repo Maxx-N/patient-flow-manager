@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 
 import { environment } from 'src/environments/environment';
-import { Card, DtoCard } from '../model/card';
+import { Card, DtoCard } from '../models/card';
 
 @Injectable({
   providedIn: 'root',
