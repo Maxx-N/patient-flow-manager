@@ -108,21 +108,30 @@ export class CardService {
       return arr.toLowerCase().trim();
     });
 
-    this.displayedCards = this.cards
-      .filter((card) => {
-        if (!!filteredArrhythmias.length) {
-          return card.arrhythmias.some((arr) => {
-            return filteredArrhythmias.includes(arr.toLowerCase().trim());
-          });
-        } else {
-          return true;
-        }
-      })
-      .filter((card) => {
-        return filteredName
-          ? card.patientName.toLowerCase().trim().includes(filteredName)
-          : true;
+    this.displayedCards = this.cards.filter((card) => {
+      if (!!!filteredArrhythmias.length && !!!filteredName) {
+        return true;
+      }
+
+      const doesIncludeName: boolean = card.patientName
+        .toLowerCase()
+        .trim()
+        .includes(filteredName);
+
+      if (!!!filteredArrhythmias.length) {
+        return doesIncludeName;
+      }
+
+      const doesIncludeArrhythmia: boolean = card.arrhythmias.some((arr) => {
+        return filteredArrhythmias.includes(arr.toLowerCase().trim());
       });
+
+      if (!!!filteredName) {
+        return doesIncludeArrhythmia;
+      }
+
+      return doesIncludeName && doesIncludeArrhythmia;
+    });
 
     this.updateDisplayedCards();
   }
