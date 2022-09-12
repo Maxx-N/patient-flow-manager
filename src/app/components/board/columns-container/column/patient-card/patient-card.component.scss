@@ -22,17 +22,21 @@
 
   .center-card {
     .patient-arrhythmias {
-      height: calc(100% - 20px);
-      div {
-        height: 20%;
-      }
       ul {
-        height: 80%;
         overflow-y: auto;
         list-style: none;
         padding: 0;
-        border: 1px solid var(--text-color);
-        border-radius: 10px;
+      }
+      @media (min-width: 1280px) {
+        height: calc(100% - 20px);
+        div {
+          height: 20%;
+        }
+        ul {
+          height: 80%;
+          border: 1px solid var(--text-color);
+          border-radius: 10px;
+        }
       }
     }
   }
@@ -53,7 +57,6 @@
         }
       }
     }
-
   }
 }
 

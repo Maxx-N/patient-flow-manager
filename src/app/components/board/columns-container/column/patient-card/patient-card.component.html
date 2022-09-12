@@ -1,6 +1,6 @@
 <div
   class="patient-card"
-  fxLayoutAlign="space-between"
+  fxLayoutAlign.gt-md="space-between"
   [ngClass]="{
     done: card.status === 'DONE',
     rejected: card.status === 'REJECTED'
@@ -8,14 +8,14 @@
 >
   <div
     class="left-card"
-    fxFlex="30%"
-    fxLayout="column"
-    fxLayoutAlign="flex-start"
+    fxFlex.gt-md="30%"
+    fxLayout.gt-md="column"
+    fxLayoutAlign.gt-md="flex-start"
   >
     <div class="patient-name">{{ card.patientName }}</div>
   </div>
 
-  <div class="center-card" fxFlex="30%">
+  <div class="center-card" fxFlex.gt-md="30%">
     <div class="patient-arrhythmias">
       <div>Arrhythmias</div>
       <ul>
@@ -26,9 +26,9 @@
 
   <div
     class="right-card"
-    fxFlex="30%"
-    fxLayout="column"
-    fxLayoutAlign="space-between flex-end"
+    fxFlex.gt-md="30%"
+    fxLayout.gt-md="column"
+    fxLayoutAlign.gt-md="space-between flex-end"
   >
     <div class="created-date">{{ card.createdDate | date }}</div>
     <mat-select

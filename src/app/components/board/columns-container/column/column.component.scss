@@ -4,10 +4,13 @@
   border-radius: 10px;
   overflow: auto;
 
-
   .patient-card {
-    margin: 10px;
-    height: calc(25%);
+    @media (min-width: 1280px) {
+      margin: 10px;
+      height: calc(25%);
+    }
+    @media (max-width: 1279px) {
+      margin: 5px;
+    }
   }
 }
-
