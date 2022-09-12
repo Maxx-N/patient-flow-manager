@@ -1,8 +1,10 @@
 <div class="filter-bar" fxLayoutAlign="space-between">
-  <div class="title" fxFlex="50%" fxLayoutAlign="center center">FILTERS</div>
-  <div fxFlex="50%" fxLayout fxLayoutGap="10%">
-    <mat-form-field appearance="fill" fxFlex="35%">
-      <mat-label>Patient name</mat-label>
+  <div class="title" fxFlex.gt-md="50%" fxLayoutAlign="center center">
+    FILTERS
+  </div>
+  <div fxFlex.gt-md="50%" fxFlex.lt-lg="75%" fxLayout fxLayoutGap="10%">
+    <mat-form-field appearance="standart" fxFlex.gt-md="35%" fxFlex.lt-lg="30%">
+      <mat-label>{{ isSmallScreen ? "Name" : "Patient name" }}</mat-label>
       <input
         matInput
         type="text"
@@ -18,15 +20,17 @@
         <mat-icon>close</mat-icon>
       </button>
     </mat-form-field>
-    <mat-form-field appearance="fill" fxFlex="55%">
-      <mat-label>Arrhythmias (at least one of these)</mat-label>
+    <mat-form-field appearance="standart" fxFlex.gt-md="55%" fxFlex.lt-lg="70%">
+      <mat-label>{{
+        isSmallScreen ? "Arrhythmias" : "Arrhythmias (at least one of these)"
+      }}</mat-label>
       <mat-select
         multiple
         [(ngModel)]="filteredArrhythmias"
         (ngModelChange)="onFilter()"
       >
         <mat-option
-          *ngFor="let arrhythmia of (arrhythmias$ | async)"
+          *ngFor="let arrhythmia of arrhythmias$ | async"
           [value]="arrhythmia"
           >{{ arrhythmia }}</mat-option
         >

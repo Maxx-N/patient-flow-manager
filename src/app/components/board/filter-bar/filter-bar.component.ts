@@ -12,11 +12,20 @@ export class FilterBarComponent implements OnInit {
   filteredName = '';
   filteredArrhythmias = [];
   arrhythmias$: Observable<string[]>;
+  isSmallScreen: boolean;
 
   constructor(private cardService: CardService) {}
 
   ngOnInit(): void {
     this.arrhythmias$ = this.cardService.getArrhythmias();
+
+    const observer = new ResizeObserver((entries) => {
+      entries.forEach((entry) => {
+        this.isSmallScreen = entry.contentRect.width < 1215;
+      });
+    });
+
+    observer.observe(document.querySelector('body'));
   }
 
   onFilter(): void {
