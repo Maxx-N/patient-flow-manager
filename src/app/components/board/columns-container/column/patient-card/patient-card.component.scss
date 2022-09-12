@@ -107,9 +107,6 @@
 .mat-option {
   color: var(--bg-column);
   text-align: center;
-  &.pending {
-    background-color: var(--pending-btn);
-  }
 
   &.rejected {
     background-color: var(--rejected-btn);

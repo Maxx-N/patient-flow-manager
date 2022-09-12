@@ -15,7 +15,7 @@ export class PatientCardComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  onChangeStatus(newStatus: 'PENDING' | 'REJECTED' | 'DONE'): void {
+  onChangeStatus(newStatus: 'REJECTED' | 'DONE'): void {
     this.cardService.updateCardStatus(this.card.id, newStatus);
   }
 }

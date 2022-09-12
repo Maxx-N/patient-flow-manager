@@ -74,7 +74,7 @@ export class CardService {
     );
   }
 
-  updateCardStatus(cardId: number, newStatus: 'PENDING' | 'REJECTED' | 'DONE') {
+  updateCardStatus(cardId: number, newStatus: 'REJECTED' | 'DONE') {
     this.getCardById(cardId).status = newStatus;
     this.updateDisplayedCards();
   }

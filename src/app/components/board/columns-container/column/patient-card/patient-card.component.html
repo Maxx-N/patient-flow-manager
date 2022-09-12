@@ -37,11 +37,10 @@
       (selectionChange)="onChangeStatus($event.value)"
     >
       <mat-option
-        *ngFor="let choice of ['PENDING', 'REJECTED', 'DONE']"
+        *ngFor="let choice of ['REJECTED', 'DONE', 'PENDING']"
         [value]="choice"
         [ngClass]="{
-          'display-none': choice === card.status,
-          pending: choice === 'PENDING',
+          'display-none': choice === card.status || choice == 'PENDING',
           rejected: choice === 'REJECTED',
           done: choice === 'DONE'
         }"
