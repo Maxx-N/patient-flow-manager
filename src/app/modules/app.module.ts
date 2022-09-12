@@ -1,22 +1,20 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
+import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { BoardComponent } from '../components/board/board.component';
-import { ColumnComponent } from '../components/board/columns-container/column/column.component';
-import { PatientCardComponent } from '../components/board/columns-container/column/patient-card/patient-card.component';
-import { FilterBarComponent } from '../components/board/filter-bar/filter-bar.component';
-import { ColumnsContainerComponent } from '../components/board/columns-container/columns-container.component';
 import { AppComponent } from '../components/app/app.component';
+import { ColumnComponent } from '../components/columns-container/column/column.component';
+import { PatientCardComponent } from '../components/columns-container/column/patient-card/patient-card.component';
+import { ColumnsContainerComponent } from '../components/columns-container/columns-container.component';
+import { FilterBarComponent } from '../components/filter-bar/filter-bar.component';
 import { MaterialModule } from './material.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    BoardComponent,
     ColumnComponent,
     PatientCardComponent,
     FilterBarComponent,

@@ -1,3 +1,30 @@
 .app {
   height: 100%;
+
+  .board {
+    height: calc(100% - 20px);
+    border: 10px solid transparent;
+
+    .filter-bar {
+      width: 90%;
+      margin: auto;
+    }
+
+    .columns {
+      height: 100%;
+      .column-titles {
+        color: var(--bg-column);
+        div {
+          padding: 10px 0;
+          margin: 10px 0;
+          border-bottom: 1px solid var(--bg-column);
+          text-align: center;
+        }
+      }
+
+      .columns-container {
+        height: 80%;
+      }
+    }
+  }
 }

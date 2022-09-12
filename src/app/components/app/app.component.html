@@ -1,3 +1,26 @@
 <div class="app">
-  <app-board></app-board>
+  <div class="board" fxLayout="column">
+    <div class="filter-bar" fxFlex="8%">
+      <app-filter-bar></app-filter-bar>
+    </div>
+
+    <div
+      class="columns"
+      fxFlex="92%"
+      fxLayout="column"
+      fxLayoutAlign="space-evenly"
+    >
+      <div class="column-titles" fxLayout fxLayoutAlign="space-evenly">
+        <div fxFlex="30%">TO DO</div>
+        <div fxFlex="30%">DONE</div>
+      </div>
+      <div class="columns-container">
+        <app-columns-container
+          [toDoCards]="toDoCards$ | async"
+          [doneCards]="doneCards$ | async"
+        ></app-columns-container>
+      </div>
+    </div>
+  </div>
+
 </div>
